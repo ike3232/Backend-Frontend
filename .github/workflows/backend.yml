@@ -46,7 +46,7 @@ jobs:
       run: pwd
       
     - name: Change Working Directory
-      run: cd Computex
+      run: cd Backend-Frontend/Computex$ 
       
     - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/backendserver:latest .
