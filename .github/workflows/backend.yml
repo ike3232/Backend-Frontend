@@ -41,6 +41,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: Print Working Directory
+      run: pwd
+    - name: Change Working Directory
+      run: cd Computex
+    
     - name: Build Docker image
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/backendserver:latest .
       
