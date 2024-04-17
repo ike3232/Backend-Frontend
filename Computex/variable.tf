@@ -8,5 +8,5 @@ variable "region" {
 }
 
 variable "credentials" {
-  description = "Credentials"
+  description = "GOOGLE_CREDENTIALS"
 }
