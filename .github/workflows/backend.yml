@@ -32,7 +32,7 @@ jobs:
       run: pwd
         
     - name: Run tests
-      run: python manage.py test
+      run: python Computex/manage.py test
       
   build-and-push:
     needs: test
