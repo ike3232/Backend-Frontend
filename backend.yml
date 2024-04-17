@@ -38,21 +38,24 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-
     
-    - name: change directory
-      run: cd Computex
-    - name: build Docker image 
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/backendserver:latest .
+    - name: Build Docker Image
+      run: docker build --file Dockerfile --tag Backendserver .
       
     - name: Login to Docker Hub
-      uses: docker/login-action@v2
+       run: docker build --file Dockerfile --tag Backendserver .
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        
-    - name: Push to Docker Hub
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/django-app:latest
+
+    - name: Push Docker Image
+      run: |
+        docker tag e-commerce ik3232/Backendserver
+
+        docker push ik3232/Backendserver
       
   deploy:
     needs: build-and-push
