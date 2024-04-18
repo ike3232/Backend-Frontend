@@ -49,7 +49,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      working-directory: ./backend-Frontend/Computex
+      working-directory: Backend-Frontend/Computex
       run: |
         pwd
         docker build -t ik3232/Backendserver:latest .
