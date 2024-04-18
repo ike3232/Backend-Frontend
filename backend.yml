@@ -57,7 +57,9 @@ jobs:
       - name: Build and push Docker Image
         uses: docker/build-push-action@v3
         with:
-          context: .
+        
+          context: ${{ github.workspace }}/Computex
+          file: ${{ github.workspace }}/Computex/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/backendserver:latest
 
