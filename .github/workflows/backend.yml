@@ -49,11 +49,10 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      working-directory: Backend-Frontend/Computex
-      run: |
-        pwd
-        docker build -t ik3232/Backendserver:latest .
-        docker push ik3232/Backendserver:latest
+      uses: docker/build-push-action@v2
+        with:
+          context: ./Backend-Frontend/Computex
+          file: ./Backend-Frontend/Computex/Dockerfile
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
