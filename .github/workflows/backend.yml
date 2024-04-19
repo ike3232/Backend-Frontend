@@ -72,7 +72,8 @@ jobs:
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
     - name: Change Working Directory
-      run: cd ./Backend-Frontend/main.tf
+      terraform -chdir=environments/production apply
+
         
     - name: Terraform Plan
       run: terraform plan -out=tfplan
