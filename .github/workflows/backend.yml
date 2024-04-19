@@ -71,12 +71,10 @@ jobs:
       run: terraform init
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-    - name: Change Working Directory
-      terraform -chdir=environments/production apply
-
         
     - name: Terraform Plan
-      run: terraform plan -out=tfplan
+      run: terraform apply -auto-approve
+      working-directory: ./Backend-Frontend
       
     - name: Terraform Apply
       run: terraform apply tfplan
