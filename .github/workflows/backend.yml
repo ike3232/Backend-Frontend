@@ -51,8 +51,12 @@ jobs:
     - name: Build & push image
       uses: docker/build-push-action@v2
         with:
-          context: ./build/Backendserver
-          file: ./build/Backendserver/Dockerfile
+          context: ./build/front
+          file: ./build/front/Dockerfile
+      run: |
+        pwd
+        docker build -t ik3232/Backendserver:latest .
+        docker push ik3232/Backendserver:latest
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
