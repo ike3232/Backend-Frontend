@@ -51,10 +51,10 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
-        context: backend-frontend/Computex
+        context: Backend-Frontend/Computex
         file: Backend-Frontend/Computex/Dockerfile
         push: true
-        tags: ik3232/Backendserver:latest
+        tags: ik3232/backendserver:latest
 
   deploy:
     needs: build-and-push
