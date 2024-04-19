@@ -49,7 +49,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and push Docker image
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       working-directory: Backend-Frontend/Computex
       run: |
         pwd
