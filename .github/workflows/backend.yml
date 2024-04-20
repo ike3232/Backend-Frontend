@@ -74,7 +74,7 @@ jobs:
         
     - name: Terraform Plan
       run: terraform apply -auto-approve
-      working-directory: ./Backend-Frontend
+      working-directory: /Backend-Frontend/Computex
       
     - name: Terraform Apply
       run: terraform apply tfplan

@@ -9,7 +9,7 @@ provider "google" {
 
 # Create a Cloud Storage bucket
 resource "google_storage_bucket" "django_bucket" {
-  name = "backendweb"
+  name = "backendserver"
 }
 
 # Create a Cloud Run service
