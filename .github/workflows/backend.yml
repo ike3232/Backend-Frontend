@@ -60,26 +60,32 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix: { env: ["development", "production"] }
+    environment: ${{ matrix.env }}
     defaults:
       run:
-        working-directory: /Backend-Frontend/Computex
+        working-directory: "./workspaces/${{ matrix.env }}"
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-      
-    - name: Terraform Init
-      run: terraform init
-      env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        
-    - name: Terraform Plan
-      run: terraform apply -auto-approve
-      
-      
-    - name: Terraform Apply
-      run: terraform apply tfplan
-      
-    - name: Run script
-      run: ./deploy_script.sh
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.7
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Verify that the configuration files are syntactically valid
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        run: terraform plan -no-color
+
