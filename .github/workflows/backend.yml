@@ -55,7 +55,7 @@ jobs:
         file: ./Computex/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/backendserver:latest
-        working-directory: Backend-Frontend
+        
 
   deploy:
     needs: build-and-push
