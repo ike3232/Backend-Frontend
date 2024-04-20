@@ -60,9 +60,9 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-  defaults:
-    run:
-      working-directory: /Backend-Frontend/Computex
+    defaults:
+      run:
+        working-directory: /Backend-Frontend/Computex
     steps:
     - uses: actions/checkout@v3
     
@@ -76,7 +76,7 @@ jobs:
         
     - name: Terraform Plan
       run: terraform apply -auto-approve
-      working-directory: ./Backend-Frontend
+      
       
     - name: Terraform Apply
       run: terraform apply tfplan
