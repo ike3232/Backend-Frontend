@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Computex
+        working-directory: ./Computex  # Use relative path from repository root
 
     steps:
     - uses: actions/checkout@v3
