@@ -10,6 +10,7 @@ provider "google" {
 # Create a Cloud Storage bucket
 resource "google_storage_bucket" "django_bucket" {
   name = "backendserver"
+  location = "us-central1"
 }
 
 # Create a Cloud Run service
