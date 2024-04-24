@@ -63,7 +63,7 @@ jobs:
 
     steps:
       - name: Terraform Format Check
-        working-directory: /home/runner/work/ike3232/ike3232
+        working-directory: ${{ github.workspace }}
         run: terraform fmt -check
       - name: Checkout code
         uses: actions/checkout@v3
