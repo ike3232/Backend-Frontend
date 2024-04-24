@@ -63,8 +63,10 @@ jobs:
 
     steps:
       - name: Terraform Format Check
+      - name: Terraform Format Check
         working-directory: ${{ github.workspace }}
         run: terraform fmt -check
+      
       - name: Checkout code
         uses: actions/checkout@v3
 
