@@ -1,7 +1,7 @@
 # Configure the Google Cloud provider
 provider "google" {
-  project = var.project_id
-  region  = var.region
+  project     = var.project_id
+  region      = var.region
   credentials = var.credentials
 }
 
@@ -10,13 +10,11 @@ provider "google" {
 # Create a Cloud Storage bucket
 resource "google_storage_bucket" "django_bucket" {
   name = "backendserver"
-  location = "us-central1"
 }
 
 # Create a Cloud Run service
 resource "google_cloud_run_service" "django_service" {
-  name     = "app"
-  location = "us-central1"
+  name = "app"
 
   template {
     spec {
