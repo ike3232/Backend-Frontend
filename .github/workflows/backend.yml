@@ -60,15 +60,11 @@ jobs:
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix: { env: ["development", "production"] }
-    environment: ${{ matrix.env }}
-    defaults:
-      run:
-        working-directory: "./workspaces/${{ matrix.env }}"
 
     steps:
+      - name: Terraform Format Check
+        working-directory: /Backend-Frontend/Computex
+        run: terraform fmt -check
       - name: Checkout code
         uses: actions/checkout@v3
 
