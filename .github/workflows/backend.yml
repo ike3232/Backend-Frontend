@@ -63,7 +63,7 @@ jobs:
 
     steps:
       - name: Terraform Format Check
-        working-directory: /Backend-Frontend/Computex
+        working-directory: /Backend-Frontend
         run: terraform fmt -check
       - name: Checkout code
         uses: actions/checkout@v3
