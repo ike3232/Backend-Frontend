@@ -1,8 +1,15 @@
-name: Publish frontend image
+name: Django Deployment
 
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - main
+
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_REGION: ${{ secrets.GGH_REGION }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   push_to_registry:
