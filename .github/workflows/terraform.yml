@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_REGION: ${{ secrets.GGH_REGION }}
+  GCP_PROJECT: ${{ secrets.PROJECT_ID }}
+  GCP_REGION: ${{ secrets.GCPREGION }}
   credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
 
 
