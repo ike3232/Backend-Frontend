@@ -40,7 +40,4 @@ jobs:
         run: |
           terraform apply -auto-approve
 
-      - name: Terraform Destroy
-        if: "contains(github.event.commits[0].message, '[detruire]')"
-        run: |
-          terraform apply -destroy -auto-approve
+    
