@@ -1,17 +1,15 @@
-# this workflow job is used to automate provision of servers and resources 
-# for Google Cloud Project with terraform
-# author: Yann Mulonda
-
-name: 'Terraform'
+name: terraform
 
 on:
   push:
     branches:
-    - terraform
-  pull_request:
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_REGION: ${{ secrets.GGH_REGION }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   terraform:
