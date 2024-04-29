@@ -35,5 +35,5 @@ variable "credentials" {
   description = "Google Cloud Credentials (JSON file content)"
   type        = string
   sensitive   = true
-  default     = ""
+  default     = env("GOOGLE_CREDENTIALS")
 }

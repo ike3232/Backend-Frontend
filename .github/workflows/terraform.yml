@@ -1,44 +1,24 @@
-name: terraform
-
-on:
-  push:
-    branches:
-      - main
-
+# ... (rest of the file)
 env:
   GCP_PROJECT: ${{ secrets.PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCPREGION }}
-  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} # Add this line
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
 jobs:
   terraform:
-    name: 'Provision GCP'
-    runs-on: ubuntu-latest
-    environment: production
-
+    # ... (rest of the job configuration)
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      # ... (other steps)
+      - name: Terraform Init
+        run: terraform init
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        working-directory: ./
 
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ./
-
-    - name: setup gcloud CLI
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: ${{ secrets.PROJECT_ID }}
-        credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
-        export_default_credentials: true
-
-    - name: Terraform Apply
-      run: |
-        terraform apply -auto-approve
-      env:
-        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} # Add this line
-      working-directory: ./
+      # ... (other steps)
+      - name: Terraform Apply
+        run: |
+          terraform apply -auto-approve
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        working-directory: ./
