@@ -10,26 +10,29 @@ provider "google" {
 # Create a Cloud Storage bucket
 resource "google_storage_bucket" "django_bucket" {
   name     = "backendserver"
-  location = var.region # Add this line
+  location = var.region
 }
 
 # Create a Cloud Run service
 resource "google_cloud_run_service" "django_service" {
   name     = "app"
-  location = var.region # Add this line
-  template {
-    spec {
-      containers {
-        image = "backendweb"
-        env {
-          name  = "DJANGO_SETTINGS_MODULE"
-          value = "your_project.settings"
-        }
-      }
-    }
-  }
-  traffic {
-    percent         = 100
-    latest_revision = true
-  }
+  location = var.region
+  # ... (rest of the resource configuration)
+}
+
+variable "project_id" {
+  description = "GCP project ID"
+  default     = "your-project-id"
+}
+
+variable "region" {
+  description = "GCP region to create resources in"
+  default     = "us-central1"
+}
+
+# Google Cloud Credentials
+variable "credentials" {
+  description = "Google Cloud Credentials (JSON file content)"
+  type        = string
+  sensitive   = true
 }
