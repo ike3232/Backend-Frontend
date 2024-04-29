@@ -1,3 +1,9 @@
+name: Django Deployment
+
+on:
+  push:
+    branches:
+      - main
 # ... (rest of the file)
 env:
   GCP_PROJECT: ${{ secrets.PROJECT_ID }}
