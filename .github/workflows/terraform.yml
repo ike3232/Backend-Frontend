@@ -8,10 +8,9 @@ on:
 env:
   GCP_PROJECT: ${{ secrets.PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCPREGION }}
-  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} # Add this line
 
 jobs:
-
   terraform:
     name: 'Provision GCP'
     runs-on: ubuntu-latest
@@ -28,7 +27,7 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: ./ # Specify the directory containing the main.tf file
+      working-directory: ./
 
     - name: setup gcloud CLI
       uses: google-github-actions/setup-gcloud@v1
@@ -40,4 +39,6 @@ jobs:
     - name: Terraform Apply
       run: |
         terraform apply -auto-approve
-      working-directory: ./ # Specify the directory containing the main.tf file
+      env:
+        GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} # Add this line
+      working-directory: ./
