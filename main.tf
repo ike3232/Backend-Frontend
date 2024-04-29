@@ -9,13 +9,14 @@ provider "google" {
 
 # Create a Cloud Storage bucket
 resource "google_storage_bucket" "django_bucket" {
-  name = "backendserver"
+  name     = "backendserver"
+  location = var.region # Add this line
 }
 
 # Create a Cloud Run service
 resource "google_cloud_run_service" "django_service" {
-  name = "app"
-
+  name     = "app"
+  location = var.region # Add this line
   template {
     spec {
       containers {
@@ -27,7 +28,6 @@ resource "google_cloud_run_service" "django_service" {
       }
     }
   }
-
   traffic {
     percent         = 100
     latest_revision = true
