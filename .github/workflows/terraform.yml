@@ -1,30 +1,45 @@
-name: Django Deployment
+name: Terraform
 
 on:
   push:
     branches:
       - main
-# ... (rest of the file)
+
 env:
   GCP_PROJECT: ${{ secrets.PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCPREGION }}
-  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
 jobs:
-  terraform:
-    # ... (rest of the job configuration)
-    steps:
-      # ... (other steps)
-      - name: Terraform Init
-        run: terraform init
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        working-directory: ./
 
-      # ... (other steps)
-      - name: Terraform Apply
-        run: |
-          terraform apply -auto-approve
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        working-directory: ./
+  terraform:
+    name: 'Provision GCP'
+    runs-on: ubuntu-latest
+    environment: production
+    
+    env:
+      GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./
+
+    - name: setup gcloud CLI
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ env.GCP_PROJECT }}
+        credentials: ${{ env.GOOGLE_CREDENTIALS }}
+        export_default_credentials: true
+
+    - name: Terraform Apply
+      run: |
+        terraform apply -auto-approve
+      working-directory: ./
