@@ -8,43 +8,37 @@ on:
 env:
   GCP_PROJECT: ${{ secrets.PROJECT_ID }}
   GCP_REGION: ${{ secrets.GCPREGION }}
-  credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
 jobs:
+
   terraform:
     name: 'Provision GCP'
     runs-on: ubuntu-latest
     environment: production
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: ik3232/ike3232
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./ # Specify the directory containing the main.tf file
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+    - name: setup gcloud CLI
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.PROJECT_ID }}
+        credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
+        export_default_credentials: true
 
-      - name: Terraform Init
-        run: terraform init
-
-      - name: setup gcloud CLI
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: ${{ secrets.PROJECT_ID }}
-          credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
-          export_default_credentials: true
-
-      - name: Terraform Apply
-        if: "contains(github.event.commits[0].message, '[construire]')"
-        run: |
-          terraform apply -auto-approve
-
-    
+    - name: Terraform Apply
+      if: "contains(github.event.commits[0].message, '[construire]')"
+      run: |
+        terraform apply -auto-approve
+      working-directory: ./ # Specify the directory containing the main.tf file
