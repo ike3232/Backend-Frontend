@@ -26,7 +26,7 @@ variable "project_id" {
 }
 
 variable "region" {
-  description = "GCP region to create resources in"
+  description = "GCPREGION to create resources in"
   default     = "us-central1"
 }
 
