@@ -41,5 +41,4 @@ jobs:
 
     - name: Terraform Apply
       run: |
-        terraform apply -auto-approve -var="credentials=${{ env.GOOGLE_CREDENTIALS }}"
       working-directory: ./
