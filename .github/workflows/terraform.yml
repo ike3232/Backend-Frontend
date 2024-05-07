@@ -33,11 +33,11 @@ jobs:
       working-directory: ./
 
     - name: setup gcloud CLI
-      uses: google-github-actions/setup-gcloud@v1
+      id: auth
+      uses: 'google-github-actions/auth@v0'
       with:
-        project_id: ${{ env.GCP_PROJECT }}
-        credentials: ${{ env.GOOGLE_CREDENTIALS }}
-        export_default_credentials: true
+        credentials: '${{ secrets.GCP_CREDENTIALS }}''
+
 
     - name: Terraform Apply
       run: |
