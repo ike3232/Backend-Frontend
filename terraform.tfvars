@@ -1,3 +1,3 @@
-project_id = "protean-topic-411511"
+project_id = "${{ env.GCP_PROJECT }}"
 region = "us-central1"
-credentials = "${{ secrets.GCP_CREDENTIALS }}"
+credentials = "${{ env.GOOGLE_CREDENTIALS }}"
