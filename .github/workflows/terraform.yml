@@ -29,7 +29,7 @@ jobs:
       env: 
           GOOGLE_APPLICATIONS_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
       run: |  
-          echo "$GOOGLE-APPLICATIONS_CREDENTIALS" > /tmp/credentials.json
+          echo "$GOOGLE_APPLICATIONS_CREDENTIALS" > /tmp/credentials.json
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
