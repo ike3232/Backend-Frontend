@@ -64,14 +64,14 @@ jobs:
         credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
 
     - name: Set Google Cloud Project
-      run: gcloud config set core/project ${{ env.PROJECT_ID }}
+      run: gcloud config set core/project "${{ env.PROJECT_ID }}"
 
     - name: Set Google Cloud Region
       run: gcloud config set run/region ${{ env.GCP_REGION }}
 
     - name: Enable Cloud Run API
       run: |
-        gcloud services enable run.googleapis.com --project=${{ env.PROJECT_ID }}
+        gcloud services enable run.googleapis.com --project="${{ env.PROJECT_ID }}"
 
     - name: Deploy to Google Cloud Run
       run: |
