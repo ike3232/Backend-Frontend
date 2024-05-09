@@ -68,6 +68,6 @@ jobs:
         run: |
           gcloud run deploy backend \
             --image ${{ secrets.DOCKER_USERNAME }}/backendserver:latest \
-            --project ${{ env.GCP_PROJECT }} \
+            --project ${{ env.PROJECT_ID }} \
             --platform managed \
             --allow-unauthenticated
