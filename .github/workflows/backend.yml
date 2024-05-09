@@ -61,11 +61,13 @@ jobs:
         with:
           credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
 
+      - name: Set Google Cloud Region
+        run: gcloud config set run/region ${{ env.GCP_REGION }}
+
       - name: Deploy to Google Cloud Run
         run: |
           gcloud run deploy backend \
             --image ${{ secrets.DOCKER_USERNAME }}/backendserver:latest \
             --project ${{ env.GCP_PROJECT }} \
-            --region ${{ env.GCP_REGION }} \
             --platform managed \
             --allow-unauthenticated
