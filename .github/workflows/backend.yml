@@ -69,6 +69,10 @@ jobs:
     - name: Set Google Cloud Region
       run: gcloud config set run/region ${{ env.GCP_REGION }}
 
+    - name: Enable Cloud Run API
+      run: |
+        gcloud services enable run.googleapis.com --project=${{ env.GCP_PROJECT }}
+
     - name: Deploy to Google Cloud Run
       run: |
         gcloud run deploy backend \
