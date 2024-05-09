@@ -10,7 +10,7 @@ terraform {
 provider "google" {
   # Configuration options
   provider "google" 
-  project     = "test-422618"
+  project     = "my-learning-422808"
   region      = "us-central1"
   zone        = "us-central1-a"
   credentials = file("/tmp/credentials.json")

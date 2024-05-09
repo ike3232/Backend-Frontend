@@ -1,39 +1,20 @@
-# Configure the Google Cloud provider
-provider "google" {
-  project     = var.project_id
-  region      = var.region
-  credentials = var.credentials
-}
+resource "google_compute_instance" "my-instance" {
+  name         = "my-instance"
+  machine_type = "n2-standard-2"
+  zone         = "us-central1-a"
 
-# ... (rest of your Terraform configuration) ...
+  tags = ["foo", "bar"]
 
-# Create a Cloud Storage bucket
-resource "google_storage_bucket" "django_bucket" {
-  name     = "backendserver"
-  location = var.region
-}
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      labels = {
+        my_label = "value"
+      }
+    }
+  }
+  network_interface {
+    network = "default"
+  }
 
-# Create a Cloud Run service
-resource "google_cloud_run_service" "django_service" {
-  name     = "app"
-  location = var.region
-  # ... (rest of the resource configuration)
-}
-
-variable "project_id" {
-  description = "GCP project ID"
-  default     = "your-project-id"
-}
-
-variable "region" {
-  description = "GCP region to create resources in"
-  default     = "us-central1"
-}
-
-# Google Cloud Credentials
-variable "credentials" {
-  description = "Google Cloud Credentials (JSON file content)"
-  type        = string
-  sensitive   = true
-  
 }
