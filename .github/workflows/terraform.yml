@@ -30,7 +30,7 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
-      working-directory: ./
+      
 
     - name: setup gcloud CLI
       id: auth
@@ -38,6 +38,5 @@ jobs:
       with:
         credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
 
-    - name: Terraform Apply
-      run: |
-      working-directory: ./
+  
+    
