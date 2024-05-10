@@ -7,7 +7,7 @@ on:
 
 env:
   GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
-  GCP_REGION: ${{ secrets.GGH_REGION }}
+  GCP_REGION: ${{ secrets.GCP_REGION }}
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
